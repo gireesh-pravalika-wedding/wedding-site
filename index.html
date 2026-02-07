@@ -30,9 +30,17 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: auto;
       padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      margin-top: 30px;
     }
 
     .photos {
@@ -50,12 +58,34 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
-    .card {
-      background: #fff;
-      padding: 25px;
+    #countdown {
+      font-size: 26px;
+      font-weight: bold;
+      color: #7b4f2c;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #7b4f2c;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #5c3a1f;
+    }
+
+    iframe {
+      width: 100%;
+      height: 350px;
+      border: none;
       border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      margin-top: 30px;
+      margin-top: 15px;
     }
 
     footer {
@@ -63,10 +93,23 @@
       font-size: 15px;
       color: #666;
     }
+
+    .qr img {
+      width: 220px;
+      border-radius: 14px;
+      margin-top: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🎶 Background Music -->
+<audio autoplay loop controls>
+  <source src="wedding-music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <header>
   <h1>💍 Gireesh Weds Pravalika</h1>
@@ -75,13 +118,22 @@
 
 <div class="container">
 
+  <!-- Countdown Section -->
+  <div class="card">
+    <h2>⏳ Wedding Countdown</h2>
+    <p>Counting days until our big moment 💖</p>
+    <div id="countdown">Loading...</div>
+  </div>
+
+  <!-- Couple Section -->
   <h2>The Couple</h2>
   <div class="photos">
     <img src="groom.jpg" alt="Groom Photo">
     <img src="bride.jpg" alt="Bride Photo">
   </div>
 
-  <h2>Our Moments</h2>
+  <!-- Gallery -->
+  <h2>📸 Our Moments</h2>
   <div class="photos">
     <img src="photo1.jpg">
     <img src="photo2.jpg">
@@ -89,11 +141,11 @@
     <img src="photo4.jpg">
   </div>
 
+  <!-- Wedding Details -->
   <div class="card">
-    <h2>Wedding Details</h2>
+    <h2>💒 Wedding Details</h2>
     <p><strong>Groom:</strong> Jami Gireesh</p>
     <p><strong>Bride:</strong> Potnuru Pravalika</p>
-
     <p><strong>Date:</strong> 20th February 2026</p>
     <p><strong>Venue:</strong><br>
       Sree Lakshmi Raj Function Hall<br>
@@ -101,11 +153,53 @@
     </p>
   </div>
 
+  <!-- Google Map Embed -->
+  <div class="card">
+    <h2>📍 Location</h2>
+    <p>Tap below to find the venue easily</p>
+
+    <!-- Replace this iframe link with your Google Maps embed link -->
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241803.2781389593!2d83.59273529453125!3d18.74566410000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3c8b897870eded%3A0x4b29b1e9f9e358b4!2sSri%20Laxmi%20Raj%20Function%20Hall!5e0!3m2!1sen!2sin!4v1770435749261!5m2!1sen!2sin"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+
+    <br>
+    <a href="https://www.google.com/maps" target="_blank">
+      <button>Open in Google Maps</button>
+    </a>
+  </div>
+
 </div>
 
 <footer>
   With love, Gireesh & Pravalika 💖  
 </footer>
+
+<!-- Countdown Script -->
+<script>
+  // Wedding Date: Feb 20, 2026  (India Time)
+  const weddingDate = new Date("Feb 20, 2026 00:00:00").getTime();
+
+  const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      days + " Days " + hours + " Hours " + minutes + " Min " + seconds + " Sec";
+
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById("countdown").innerHTML = "🎉 It's Wedding Time! 💍";
+    }
+  }, 1000);
+</script>
 
 </body>
 </html>
