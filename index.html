@@ -111,6 +111,10 @@
 </audio>
 
 <header>
+  <p id="musicHint" style="font-size:14px;color:#7b4f2c;">
+  🎶 Tap anywhere to play music
+</p>
+
   <h1>💍 Gireesh Weds Pravalika</h1>
   <p>Two hearts • One promise • Forever</p>
 </header>
@@ -198,14 +202,19 @@
   <script>
   document.addEventListener('click', function () {
     const music = document.getElementById('bgMusic');
+    const hint = document.getElementById('musicHint');
     if (music.paused) {
-      music.play().catch(() => {});
+      music.play().then(() => {
+        if (hint) hint.style.display = 'none';
+      }).catch(() => {});
     }
   }, { once: true });
 </script>
 
+
 </body>
 </html>
+
 
 
 
